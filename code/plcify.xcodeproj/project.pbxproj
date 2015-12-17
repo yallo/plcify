@@ -25,7 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3B11D0131C0626A1002A7E67 /* PLCer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PLCer; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B11D0131C0626A1002A7E67 /* plcify */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = plcify; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B11D0161C0626A1002A7E67 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		3B11D01D1C062CE6002A7E67 /* sndfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sndfile.h; path = /usr/local/include/sndfile.h; sourceTree = "<absolute>"; };
 		3B11D0201C062D16002A7E67 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../usr/local/lib/libsndfile.a; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		3B11D0141C0626A1002A7E67 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B11D0131C0626A1002A7E67 /* PLCer */,
+				3B11D0131C0626A1002A7E67 /* plcify */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,9 +91,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3B11D0121C0626A1002A7E67 /* PLCer */ = {
+		3B11D0121C0626A1002A7E67 /* plcify */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3B11D01A1C0626A1002A7E67 /* Build configuration list for PBXNativeTarget "PLCer" */;
+			buildConfigurationList = 3B11D01A1C0626A1002A7E67 /* Build configuration list for PBXNativeTarget "plcify" */;
 			buildPhases = (
 				3B11D00F1C0626A1002A7E67 /* Sources */,
 				3B11D0101C0626A1002A7E67 /* Frameworks */,
@@ -103,9 +103,9 @@
 			);
 			dependencies = (
 			);
-			name = PLCer;
+			name = plcify;
 			productName = PLCer;
-			productReference = 3B11D0131C0626A1002A7E67 /* PLCer */;
+			productReference = 3B11D0131C0626A1002A7E67 /* plcify */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -122,7 +122,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3B11D00E1C0626A1002A7E67 /* Build configuration list for PBXProject "PLCer" */;
+			buildConfigurationList = 3B11D00E1C0626A1002A7E67 /* Build configuration list for PBXProject "plcify" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -134,7 +134,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3B11D0121C0626A1002A7E67 /* PLCer */,
+				3B11D0121C0626A1002A7E67 /* plcify */,
 			);
 		};
 /* End PBXProject section */
@@ -235,7 +235,7 @@
 			buildSettings = {
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_CFLAGS = "-I/usr/local/include";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = plcify;
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include/**";
 			};
 			name = Debug;
@@ -245,7 +245,7 @@
 			buildSettings = {
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_CFLAGS = "-I/usr/local/include";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = plcify;
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include/**";
 			};
 			name = Release;
@@ -253,7 +253,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3B11D00E1C0626A1002A7E67 /* Build configuration list for PBXProject "PLCer" */ = {
+		3B11D00E1C0626A1002A7E67 /* Build configuration list for PBXProject "plcify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3B11D0181C0626A1002A7E67 /* Debug */,
@@ -262,13 +262,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3B11D01A1C0626A1002A7E67 /* Build configuration list for PBXNativeTarget "PLCer" */ = {
+		3B11D01A1C0626A1002A7E67 /* Build configuration list for PBXNativeTarget "plcify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3B11D01B1C0626A1002A7E67 /* Debug */,
 				3B11D01C1C0626A1002A7E67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
