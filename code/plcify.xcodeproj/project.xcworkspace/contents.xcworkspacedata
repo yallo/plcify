@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:PLCer.xcodeproj">
+      location = "self:/Users/nimast/dev/repos/PLCer/code/plcify.xcodeproj">
    </FileRef>
 </Workspace>
