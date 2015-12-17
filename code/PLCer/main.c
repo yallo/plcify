@@ -10,36 +10,65 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+#include <unistd.h>
 #include "sndfile.h"
 #include "spandsp.h"
+
 #include "plc.h"
 
 static const int kFrameSize = 160;
+static const bool kSearchForFilterTails = false;
 
 void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex);
 
 int main(int argc, const char *argv[]) {
-    if (argc != 3) {
-        printf("Usage plcer [input file] [output file]");
+    if (argc < 3) {
+        printf("Usage plcer [input file] [output file] | pass the -s option to search for filter tails when using sample rates other than 8Khz");
         exit(1);
     }
-
+    
+    int searchFilterTailsFlags = 0;
+    int index;
+    int c;
+    
+    opterr = 0;
+    while ((c = getopt (argc, argv, "s:")) != -1)
+        switch (c)
+    {
+        case 's':
+            searchFilterTailsFlags = 1;
+            printf("Searching for filter tails - file should have a rate different than 8Khz\n");
+            break;
+        case '?':
+            if (isprint (optopt))
+                fprintf (stderr, "Unknown option `-%c'.\n", optopt);
+            else
+                fprintf (stderr,
+                         "Unknown option character `\\x%x'.\n",
+                         optopt);
+            return 1;
+        default:
+            abort ();
+    }
+    
+    index = optind - 1;
+    
     SNDFILE *sndfile;
     SF_INFO sfinfo;
     SF_INFO outputInfo;
-    sndfile = sf_open(argv[1], SFM_READ, &sfinfo);
+    printf("Opening input file %s\n", argv[index]);
+    sndfile = sf_open(argv[index], SFM_READ, &sfinfo);
     if (sndfile == 0) {
-        printf("error");
+        printf("error opening input file \n");
         exit(1);
     }
 
     outputInfo.samplerate = sfinfo.samplerate;
     outputInfo.channels = sfinfo.channels;
     outputInfo.format = sfinfo.format;
-
+    
     SNDFILE *outputFile;
-    outputFile = sf_open(argv[2], SFM_WRITE, &outputInfo);
+    outputFile = sf_open(argv[index + 1], SFM_WRITE, &outputInfo);
     if (outputFile == 0) {
         printf("Error creating output file\n");
         exit(1);
@@ -78,8 +107,9 @@ void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex) {
     for (sf_count_t i = 0; i < sample_cnt; i++) {
         if (abs(audio[(i * sfinfo.channels) + channelIndex]) <= 1) {
             zeroSamplesCounter++;
-
-            if (zeroSamplesCounter >= (kFrameSize - 60) && i > (sizeof(history_buffer) + kFrameSize)) {
+            
+            int frameSize = kSearchForFilterTails ? kFrameSize - 60 : kFrameSize;
+            if (zeroSamplesCounter >= frameSize && i > (sizeof(history_buffer) + kFrameSize)) {
                 if (zeroSamplesCounter < kFrameSize) {
                     i += (kFrameSize - zeroSamplesCounter + 30) / 2;
                 }
