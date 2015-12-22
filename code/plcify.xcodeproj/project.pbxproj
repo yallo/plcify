@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B11D0171C0626A1002A7E67 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D0161C0626A1002A7E67 /* main.c */; };
 		3B11D0221C062D6A002A7E67 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B11D0201C062D16002A7E67 /* libsndfile.a */; };
 		3B11D0261C064ABC002A7E67 /* libspandsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B11D0251C064ABC002A7E67 /* libspandsp.a */; };
+		3BB7255C1C2868D50025264B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7255B1C2868D50025264B /* main.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,10 +26,10 @@
 
 /* Begin PBXFileReference section */
 		3B11D0131C0626A1002A7E67 /* plcify */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = plcify; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B11D0161C0626A1002A7E67 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		3B11D01D1C062CE6002A7E67 /* sndfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sndfile.h; path = /usr/local/include/sndfile.h; sourceTree = "<absolute>"; };
 		3B11D0201C062D16002A7E67 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../usr/local/lib/libsndfile.a; sourceTree = "<group>"; };
 		3B11D0251C064ABC002A7E67 /* libspandsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspandsp.a; path = ../../../../usr/local/lib/libspandsp.a; sourceTree = "<group>"; };
+		3BB7255B1C2868D50025264B /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = plcify/main.c; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +50,7 @@
 			children = (
 				3B11D01F1C062CF2002A7E67 /* lib */,
 				3B11D01E1C062CEB002A7E67 /* include */,
-				3B11D0151C0626A1002A7E67 /* PLCer */,
+				3B11D0151C0626A1002A7E67 /* plcify */,
 				3B11D0141C0626A1002A7E67 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,11 +63,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3B11D0151C0626A1002A7E67 /* PLCer */ = {
+		3B11D0151C0626A1002A7E67 /* plcify */ = {
 			isa = PBXGroup;
 			children = (
-				3B11D0161C0626A1002A7E67 /* main.c */,
+				3BB7255B1C2868D50025264B /* main.c */,
 			);
+			name = plcify;
 			path = PLCer;
 			sourceTree = "<group>";
 		};
@@ -144,7 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B11D0171C0626A1002A7E67 /* main.c in Sources */,
+				3BB7255C1C2868D50025264B /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
