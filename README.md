@@ -1,9 +1,9 @@
-# PLCer
+# plcify
 A Command line utility to execute packet loss concealment algorithm on wavs 
 
 # Usage 
 ```
-./PLCer [input_path] [output_path]
+./plcify [input_path] [output_path]
 ```
 Note that the input file must be a 8khz 16 bit PCM wav file. A file in an identical format will be created at the output path.
 
