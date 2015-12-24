@@ -21,7 +21,7 @@ void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex);
 
 int main(int argc, const char *argv[]) {
     if (argc != 3) {
-        printf("Usage plcer [input file] [output file]");
+        printf("Usage plcer [input file] [output file]\n");
         exit(1);
     }
 
@@ -73,9 +73,9 @@ void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex) {
     sf_count_t sample_cnt = sfinfo.frames;
     short fillin_data[kFrameSize];
     const int kHistoryBuffers = 6;
-    short history_buffer[kFrameSize * kHistoryBuffers] = {};
-
-    for (sf_count_t i = 0; i < sample_cnt; i++) {
+    short history_buffer[kFrameSize * kHistoryBuffers];
+    sf_count_t i;
+    for (i = 0; i < sample_cnt; i++) {
         if (abs(audio[(i * sfinfo.channels) + channelIndex]) <= 1) {
             zeroSamplesCounter++;
 
@@ -86,8 +86,8 @@ void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex) {
 
                 printf("FOUND MISSING FRAME at index %lld \n", i);
                 zeroSamplesCounter = 0;
-
-                for (sf_count_t t = (kFrameSize * kHistoryBuffers) - 1, z = 0; t >= 0; t--, z++) {
+                sf_count_t t, z;
+                for (t = (kFrameSize * kHistoryBuffers) - 1, z = 0; t >= 0; t--, z++) {
                     history_buffer[t] = audio[((i - z - kFrameSize) * sfinfo.channels) + channelIndex];
                 }
 
@@ -95,7 +95,8 @@ void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex) {
 
                 int n = plc_fillin(context, fillin_data, kFrameSize);
                 printf("Number of samples synthsized %d\n", n);
-                for (sf_count_t j = 0; j < kFrameSize; j++) {
+                sf_count_t j;
+                for (j = 0; j < kFrameSize; j++) {
                     // writing back the fillin data to the beginning of the missing frame in the correct channel
                     sf_count_t indexInOriginalAudioStream = i - (kFrameSize - 1) + j;
                     audio[(indexInOriginalAudioStream * sfinfo.channels) + channelIndex] = fillin_data[j];
