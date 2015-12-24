@@ -21,7 +21,7 @@ void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex);
 
 int main(int argc, const char *argv[]) {
     if (argc != 3) {
-        printf("Usage plcer [input file] [output file]");
+        printf("Usage plcer [input file] [output file]\n");
         exit(1);
     }
 
