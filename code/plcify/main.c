@@ -15,10 +15,20 @@
 #include "spandsp.h"
 #include "plc.h"
 
+// The size of a frame of audio. This is determined by the framesize in ms and the audio sampling frequency.
+// 160 is 20ms * 8Khz. This is the size of the lost data we are trying to compensate.
 static const int kFrameSize = 160;
 
+/**
+* Fills in missing frames in the passed in audio buffer according to PLC algorithm
+* with data collected from the input file.
+* @param sfinfo A Pointer to an open audio file containing the given audio stream.
+* @param audio An audio stream which potentially contains holes in it to be fixed.
+* @param channelIndex The index of the channel within the file on which the algorithm should run.
+*/
 void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex);
 
+// Controls operation of the program.
 int main(int argc, const char *argv[]) {
     if (argc != 3) {
         printf("Usage plcer [input file] [output file]\n");
@@ -50,6 +60,12 @@ int main(int argc, const char *argv[]) {
     printf("samplerate: %d\n", sfinfo.samplerate);
     printf("channels: %d\n", sfinfo.channels);
     printf("format: %d\n", sfinfo.format);
+    
+    if (sfinfo.samplerate != 8000) {
+        printf("Unsupported sample rate %d, plcify only supports 8Khz files. \n", sfinfo.samplerate);
+        exit(1);
+    }
+    
     sf_count_t fileLength = sfinfo.channels * sfinfo.frames;
     short *audio = calloc(fileLength, sizeof(short));
 
@@ -67,6 +83,7 @@ int main(int argc, const char *argv[]) {
     return 0;
 }
 
+// Fills in missing frames in the passed in audio buffer according to PLC algorithm
 void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex) {
     plc_state_t *context = plc_init(NULL);
     int zeroSamplesCounter = 0;
@@ -79,11 +96,7 @@ void fillinMissingFrames(SF_INFO sfinfo, short *audio, int channelIndex) {
         if (abs(audio[(i * sfinfo.channels) + channelIndex]) <= 1) {
             zeroSamplesCounter++;
 
-            if (zeroSamplesCounter >= (kFrameSize - 60) && i > (sizeof(history_buffer) + kFrameSize)) {
-                if (zeroSamplesCounter < kFrameSize) {
-                    i += (kFrameSize - zeroSamplesCounter + 30) / 2;
-                }
-
+            if (zeroSamplesCounter >= kFrameSize && i > (sizeof(history_buffer) + kFrameSize)) {
                 printf("FOUND MISSING FRAME at index %lld \n", i);
                 zeroSamplesCounter = 0;
                 sf_count_t t, z;
